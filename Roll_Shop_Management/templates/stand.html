@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSW ASSEMBLER</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../static/stand.css" />
+  <style>
+    #rollForm {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-section label,
+    .form-section input,
+    .form-section select {
+      margin-bottom: 10px;
+    }
+
+    button.red-gradient-action {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 17px;
+      transition: all 0.3s ease;
+      min-width: 140px;
+      text-align: center;
+      position: relative;
+      top: 11px;
+    }
+
+    button.red-gradient-actionok {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 17px;
+      transition: all 0.3s ease;
+      min-width: 140px;
+      text-align: center;
+      position: relative;
+      top: -16px;
+    }
+
+
+    button.red-gradient-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+      background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    }
+
+    #tableContainer,
+    #statusAsblTableContainer {
+      max-height: 600px;
+      overflow-y: auto;
+      overflow-x: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      background-color: #fff;
+      margin-top: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      display: none;
+    }
+
+    #tableContainer table,
+    #statusAsblTableContainer table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Rubik', sans-serif;
+      font-size: 16px;
+    }
+
+    #tableContainer th,
+    #statusAsblTableContainer th {
+      background-color: #f4f4f4;
+      color: #333;
+      font-weight: bold;
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    #tableContainer td,
+    #statusAsblTableContainer td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    #tableContainer tr:nth-child(even),
+    #statusAsblTableContainer tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    #tableContainer tr:hover,
+    #statusAsblTableContainer tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>STAND ASSEMBLY POINT</h1>
+    <a href="homepage.html" id="home">Go to home</a>
+
+    <div class="tabs">
+      <div class="dropdown-wrapper dropdown">
+        <button class="btnstatus" id="standRollBtn"><span>STAND ASSEMBLY</span></button>
+        <div class="dropdown-content">
+          <button class="btnstatus" id="StandinPointBtn">Stand-in Point</button>
+          <button class="btnstatus" id="StandoutPointBtn">Stand-out Point</button>
+        </div>
+      </div>
+
+      <div id="StandSection" style="display: none; margin-top: 20px;">
+        <button class="red-gradient-actionok" id="viewAssembledRollsBtn">View Assembled Rolls</button>
+
+        <!-- START HIDDEN FORM SECTION -->
+        <div id="formSection"
+          style="display: none; width: 100vw; max-width: 100%; box-sizing: border-box; margin-left: -225px;">
+          <h2 id="selectRowsMsg" style="display:none;animation: none; transform: none;">Please Select only 2 rows at a
+            time</h2>
+
+          <div id="tableContainer"></div>
+
+          <button class="red-gradient-action" id="selectRowBtn" style="display:none;">Select Row</button>
+
+          <h3 style="animation: none; transform: none;">Roll Details Form</h3>
+          <form id="rollForm" action="/submit_roll" method="POST">
+            <div class="form-section">
+              <label for="rollType1">Roll Type:</label>
+              <input type="text" id="rollType1" name="rollType1" required />
+
+              <label for="vendorNo1">Vendor No:</label>
+              <input type="text" id="vendorNo1" name="vendorNo1" required />
+
+              <label for="diaCurrent1">Dia Current:</label>
+              <input type="number" step="0.01" id="diaCurrent1" name="diaCurrent1" required />
+
+              <label for="standPosition1">Stand Position:</label>
+              <select id="standPosition1" name="standPosition1" required>
+                <option value="" disabled selected>Select position</option>
+                <option value="TOP">TOP</option>
+                <option value="BOTTOM">BOTTOM</option>
+              </select>
+            </div>
+
+            <div class="form-section">
+              <label for="rollType2">Roll Type:</label>
+              <input type="text" id="rollType2" name="rollType2" required />
+
+              <label for="vendorNo2">Vendor No:</label>
+              <input type="text" id="vendorNo2" name="vendorNo2" required />
+
+              <label for="diaCurrent2">Dia Current:</label>
+              <input type="number" step="0.01" id="diaCurrent2" name="diaCurrent2" required />
+
+              <label for="standPosition2">Stand Position:</label>
+              <select id="standPosition2" name="standPosition2" required>
+                <option value="" disabled selected>Select position</option>
+                <option value="TOP">TOP</option>
+                <option value="BOTTOM">BOTTOM</option>
+              </select>
+
+              <label for="standNo" style="margin-left: -835px; width: 100px;">Stand No:</label>
+              <select id="standNo" name="standNo" required style="margin-left: -835px; width: 300px;">
+                <option value="" disabled selected>Select Stand No</option>
+              </select>
+            </div>
+          </form>
+
+          <div style="margin-top: 20px;">
+            <button class="red-gradient-action" type="submit" form="rollForm">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="StandOutSection" style="display: none; margin-top: 20px;">
+      <h4 style="animation: none; transform: none;">Stand-out Point Section</h4>
+      <button class="red-gradient-action" id="viewStatusAsblBtn">View Stand ASBL Table</button>
+      <div id="statusAsblTableContainer" style="display: none; margin-top: 20px;"></div>
+      <div style="margin-top: 20px;">
+        <button class="red-gradient-action" id="submitStandOutBtn" style="display:none;">Stand-out</button>
+      </div>
+    </div>
+
+
+    <script src="../static/js/stand.js"></script>
+</body>
+
+</html>

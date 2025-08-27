@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSW</title>
+    <link rel="stylesheet" href="../static/drop.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>L2 DATA</h1>
+        <a href="homepage.html" id="home">Go to home</a>
+        <div class="tabs">
+            <a href="grinding.html"><span>Grinding Details</span></a>
+            <a href="job_work_details.html"><span>Job Work Details</span></a>
+            <a href="level_2_data.html"><span class="active">Level-2 Data</span></a>
+            <a href="sap_purchase_details.html"><span>SAP Purchase Details</span></a>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search anything in table...">
+            <button class="search-button" onclick="searchTable()">Search</button>
+        </div>
+
+        {% if error_msg %}
+        <div
+            style="margin: 15px 0; padding: 10px; border: 1px solid #f44336; background-color: #ffe6e6; color: #b71c1c;">
+            {{ error_msg }}
+        </div>
+        {% endif %}
+
+        {% if update_msg %}
+        <div
+            style="margin: 15px 0; padding: 10px; border: 1px solid #4CAF50; background-color: #e8f5e9; color: #256029;">
+            {{ update_msg }}
+        </div>
+        {% endif %}
+
+        {% if table %}
+        <div class="container mt-5">
+            <div
+                style="max-height: 600px; overflow-y: auto; overflow-x: auto; margin-top: 20px; border: 1px solid #ccc; border-radius: 8px;">
+                <div style="min-width: max-content;">
+                    {{ table|safe }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- <form action="/L2-DATA" method="POST">
+            <button type="submit" class="btn submit">Submit Data to L2 DATA</button>
+        </form> -->
+    {% endif %}
+    </div>
+
+    <script src="../static/js/level_2_data.js"></script>
+</body>
+
+</html>

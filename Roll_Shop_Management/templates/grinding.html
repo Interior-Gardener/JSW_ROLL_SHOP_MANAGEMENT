@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grinding Details - JSW</title>
+    <link rel="stylesheet" href="../static/drop.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <style>
+        
+        .alert {
+            padding: 10px;
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #0052cc;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #003d99;
+        }
+
+        .upload-box {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #0052cc;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .upload-box:hover {
+            background-color: #eef3fb;
+        }
+
+        #filename {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        }
+
+
+    .dropdown-content {
+        position: absolute;
+        border-radius: 8px;
+        background-color: #c0392b;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        border: 1px solid #ccc;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-content a {
+        color: rgb(255, 255, 255);
+        padding: 10px 14px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ec4545;
+    }
+
+    .dropdown:hover .dropdown-content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Grinding - Roll Shop Data Entry</h1>
+        <a href="homepage.html" id="home">Go to home</a>
+
+        <div class="tabs">
+            <div class="dropdown">
+                <a><span class="active">Grinding Details</span></a>
+                <div class="dropdown-content">
+                    <a href="wr.html">Work Roll Data</a>
+                    <a href="imr.html">IMR Data</a>
+                    <a href="br.html">Backup Roll Data</a>
+                    <a href="allrd.html">All Roll Data</a>
+                </div>
+            </div>
+            <a href="job_work_details.html"><span>Job Work Details</span></a>
+            <a href="level_2_data.html"><span>Level-2 Data</span></a>
+            <a href="sap_purchase_details.html"><span>SAP Purchase Details</span></a>
+        </div>
+
+        <form id="uploadForm" action="/grinding.html" method="POST" enctype="multipart/form-data">
+            <div class="upload-section">
+                <a href="{{ url_for('download_file', filename='Basic_template.xlsx') }}" class="btn download">
+                    <i class="fas fa-download"></i> Download Excel Template
+                </a>
+                <div class="upload-box">
+                    <p><strong>Upload File</strong></p>
+                    <input type="file" name="file" id="fileInput" style="display: none;" required>
+                    <button type="button" class="btn"
+                        onclick="document.getElementById('fileInput').click()">Browse</button>
+                    <div id="filename">No file selected</div>
+                    <br>
+                    <button type="submit" class="btn">Validate</button>
+                </div>
+            </div>
+        </form>
+
+        {% if message %}
+        <div class="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        {% if table %}
+        <div class="container mt-5" style="max-height: 600px; overflow-y: auto; overflow-x: auto; margin-top: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <h2 class="mb4">Validated Excel Data</h2>
+            <div style="overflow-x: auto;">
+                {{ table|safe }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if table %}
+        <form action="/submit-grinding-data" method="POST">
+            <button type="submit" class="btn submit">Submit Data to Grinding Details</button>
+        </form>
+        {% endif %}
+    </div>
+    <script src="../static/js/grinding.js"></script>
+</body>
+
+</html>

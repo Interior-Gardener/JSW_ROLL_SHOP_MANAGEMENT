@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - JSW Vasind Works</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/login.css">
+</head>
+
+<body>
+    <!-- Wave animation background -->
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <!-- Floating circles animation -->
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="container">
+        <div class="header">
+            <div id="logo"><img src="../static/logo.png" alt="JSW Logo"></div>
+            <h1>Vasind Rollshop</h1>
+        </div>
+
+        <div class="login-container">
+            <div class="login-box">
+                <form action="/" method="POST">
+                    <h2 class="login-title">Login</h2>
+
+                    {% if error %}
+                    <p style="color: red; font-weight: bold;">{{ error }}</p>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="id"><i class="fas fa-id-badge"></i> Employee-id</label>
+                        <input type="text" id="id" name="employeeid" maxlength="50" placeholder="Enter your Employee-id"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <!-- <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                    </div> -->
+
+                    <button type="submit" class="btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JSW Vasind Works. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../static/js/login.js"></script>
+
+</body>
+
+</html>

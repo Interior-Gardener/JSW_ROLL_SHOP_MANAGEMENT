@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSW Roller Inventory Form</title>
+  <link rel="stylesheet" href="../static/inventoryform.css">
+  <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Wave animation background -->
+  <div class="wave wave1"></div>
+  <div class="wave wave2"></div>
+
+  <!-- Floating circles animation -->
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <h1><b>JSW Roller Inventory</b></h1>
+
+  <form id="rollerForm">
+    <table>
+      <a href="homepage.html" id="home">Go to home</a>
+      <tr><td>Sr.no.</td><td><input type="number" name="Sr_no" required></td></tr>
+      <tr><td>Vendor no</td><td><input type="text" name="Vendor_no" required></td></tr>
+      <tr><td>JSW no</td><td><input type="text" name="JSW_no" required></td></tr>
+      <tr><td>Asset No</td><td><input type="text" name="Asset_No" required></td></tr>
+      <tr><td>Bill Entry NO</td><td><input type="text" name="Bill_Entry_NO" required></td></tr>
+      <tr><td>Bill Entry Date</td><td><input type="date" name="Bill_Entry_Date" required></td></tr>
+      <tr><td>MRN No</td><td><input type="text" name="MRN_No" required></td></tr>
+      <tr><td>MRN Date</td><td><input type="date" name="MRN_Date" required></td></tr>
+      <tr><td>Material Code</td><td><input type="text" name="Material_Code" required></td></tr>
+      <tr><td>Dia (min)</td><td><input type="number" step="any" name="Dia_min" required></td></tr>
+      <tr><td>Dia (max)</td><td><input type="number" step="any" name="Dia_max" required></td></tr>
+      <tr><td>Barrel Length</td><td><input type="number" step="any" name="Barrel_Length"required></td></tr>
+      <tr><td>Total Length</td><td><input type="number" step="any" name="Total_Length" required></td></tr>
+      <tr><td>Chrome%</td><td><input type="number" step="any" name="Chrome_percent" required></td></tr>
+      <tr><td>Chrome</td><td><input type="number" step="any" name="Chrome" required></td></tr>
+      <tr><td>Supplier Name</td><td><input type="text" name="Supplier_Name" required></td></tr>
+      <tr><td>Roll's Material</td><td><input type="text" name="Rolls_Material" required></td></tr>
+      <tr><td>Roll Wt</td><td><input type="number" step="any" name="Roll_Wt" required></td></tr>
+      <tr><td>Roll Price</td><td><input type="number" step="any" name="Roll_Price"></td></tr>
+      <tr><td>Mode</td><td><input type="text" name="Mode"></td></tr>
+      <tr><td>Conversion</td><td><input type="text" name="Conversion"></td></tr>
+      <tr><td>Roll Value in INR</td><td><input type="number" step="any" name="Roll_Value_INR"></td></tr>
+      <tr><td>JCDB @ 7.5%</td><td><input type="number" step="any" name="JCDB_7_5_percent"></td></tr>
+      <tr><td>ZSWC@ 10% on CD</td><td><input type="number" step="any" name="ZSWC_10_percent"></td></tr>
+      <tr><td>GST@18%</td><td><input type="number" step="any" name="GST_18_percent"></td></tr>
+      <tr><td>Clerance @2.5%</td><td><input type="number" step="any" name="Clerance_2_5_percent"></td></tr>
+      <tr><td>Total value</td><td><input type="number" step="any" name="Total_value"></td></tr>
+      <tr><td>Landed Value</td><td><input type="number" step="any" name="Landed_Value"></td></tr>
+      <tr><td>UOM</td><td><input type="text" name="UOM" required></td></tr>
+      <tr><td>PO no</td><td><input type="text" name="PO_no" required></td></tr>
+      <tr><td>Acct.ass.Cat.</td><td><input type="text" name="Acct_ass_Cat"></td></tr>
+      <tr><td>LD</td><td><input type="text" name="LD"></td></tr>
+      <tr><td>WBS Element</td><td><input type="text" name="WBS_Element" required></td></tr>
+      <tr><td>EPCG Licence No</td><td><input type="text" name="EPCG_Licence_No" required></td></tr>
+      <tr><td>EPCG Licence Date</td><td><input type="date" name="EPCG_Licence_Date" required></td></tr>
+      <tr><td>Gate entry date</td><td><input type="date" name="Gate_entry_date" required></td></tr>
+      <tr><td>Receiving Date</td><td><input type="date" name="Receiving_Date" required></td></tr>
+
+      <!-- Status Dropdown -->
+      <tr>
+        <td>Status</td>
+        <td>
+          <select name="Status" required>
+            <option value="">-- Select Status --</option>
+            <option value="INCIRCULATION">INCIRCULATION</option>
+            <option value="AVAILABLE FOR GRINDER-1">AVAILABLE FOR GRINDER-1</option>
+            <option value="AVAILABLE FOR GRINDER-2">AVAILABLE FOR GRINDER-2</option>
+            <option value="AVAILABLE FOR GRINDER-3">AVAILABLE FOR GRINDER-3</option>
+            <option value="IN-PROCESS">IN-PROCESS</option>
+            <option value="GROUND">GROUND</option>
+            <option value="CHOKED">CHOKED</option>
+            <option value="IN FRONT OF MILL">IN FRONT OF MILL</option>
+            <option value="AT-MILL">AT-MILL</option>
+            <option value="MILL-OUT">MILL-OUT</option>
+            <option value="DECHOKED">DECHOKED</option>
+            <option value="AVAILABLE FOR GRINDING">AVAILABLE FOR GRINDING</option>
+            <option value="OUT OF SERVICE">OUT OF SERVICE</option>
+            <option value="DISCARDED">DISCARDED</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr><td>Issue slip No-Store</td><td><input type="text" name="Issue_slip_No_Store" required></td></tr>
+    </table>
+
+    <div class="button-container">
+      <button id="btn" type="submit">Submit</button>
+    </div>
+  </form>
+
+  <script src="../static/js/inventoryform.js"></script>
+
+</body>
+</html>

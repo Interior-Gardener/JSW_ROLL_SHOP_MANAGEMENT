@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Change Roll Status</title>
+    <link rel="stylesheet" href="../static/crs.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Change Roll Status</h1>
+
+        <a href="homepage.html" id="home">Go to home</a>
+
+        <div class="tabs">
+            <button class="btnstatus"><span>NEW</span></button>
+
+            <div class="dropdown-wrapper dropdown">
+                <button class="btnstatus"><span>INCIRCULATION</span></button>
+                <div class="dropdown-content">
+                    <button class="btnstatus">AVAILABLE FOR HERKULES-1</button>
+                    <button class="btnstatus">AVAILABLE FOR HERKULES-2</button>
+                    <button class="btnstatus">AVAILABLE FOR HERKULES-3</button>
+                    <button class="btnstatus">AVAILABLE FOR POMINI</button>
+                    <button class="btnstatus">AVAILABLE FOR MESTA</button>
+                    <button class="btnstatus">IN-PROCESS</button>
+                    <button class="btnstatus">GROUND</button>
+                    <button class="btnstatus">HOLD</button>
+                    <button class="btnstatus">CHOKED</button>
+                    <button class="btnstatus">IN FRONT OF MILL</button>
+                    <button class="btnstatus">AT-MILL</button>
+                    <button class="btnstatus">MILL-OUT</button>
+                    <button class="btnstatus">DECHOKED</button>
+                    <button class="btnstatus">AVAILABLE FOR GRINDING</button>
+                    <button class="btnstatus">OUT OF SERVICE</button>
+                </div>
+            </div>
+            <button class="btnstatus"><span>DISCARDED</span></button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search anything in table..." />
+            <button class="search-button" onclick="searchTable()">Search</button>
+        </div>
+
+        {% if table %}
+        <div class="container mt-5" style="margin-top: 20px;">
+            <!-- <div style="height: 375px; overflow-y: auto; overflow-x: auto; border: 1px solid #ccc; border-radius: 8px;"> -->
+                <div>
+                <div style="min-width: max-content;">
+                    {{ table|safe }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if update_msg %}
+    <div style="margin: 15px 0; padding: 10px; border: 1px solid #ccc; background-color: #f5f5f5; font-size: 16px;">
+        {{ update_msg|safe }}
+    </div>
+    {% endif %}
+
+    <script src="../static/js/crs.js"></script>
+</body>
+
+</html>

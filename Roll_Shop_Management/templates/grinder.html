@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Grinding Machine</title>
+    <link rel="stylesheet" href="../static/grinder.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Charge Roll</h1>
+        <a href="homepage.html" id="home">Go to home</a>
+
+        <!-- Status filter dropdown -->
+        <div class="dropdown-wrapper dropdown">
+            <button class="btnstatus"><span>INCIRCULATION ▼</span></button>
+            <div class="dropdown-content">
+                <button class="btnstatus">AVAILABLE FOR HERKULES-1</button>
+                <button class="btnstatus">AVAILABLE FOR HERKULES-2</button>
+                <button class="btnstatus">AVAILABLE FOR HERKULES-3</button>
+                <button class="btnstatus">AVAILABLE FOR POMINI</button>
+                <button class="btnstatus">AVAILABLE FOR MESTA</button>
+                <button class="btnstatus">HOLD</button>
+                <button class="btnstatus">IN-PROCESS</button>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search in table...">
+            <button type="button" onclick="searchTable()">Search</button>
+        </div>
+
+        {% if table %}
+        <form method="POST" action="/grinder.html">
+            <div class="container mt-5" style="max-height: 600px; overflow-y: auto; overflow-x: auto; margin-top: 20px; border: 1px solid #ccc; border-radius: 8px;">
+                {{ table|safe }}
+            </div>
+
+            <input type="hidden" name="next_status" value="{{ next_status }}">
+
+            {% if submit_form %}
+            <div class="btn">
+                <button type="button" id="showInspectionFormBtn">Show form</button>
+            </div>
+            {% endif %}
+
+
+            <!-- Inspection Form -->
+            <div id="inspectionFormContainer" style="display: none; margin-top: 30px;">
+                <div class="section-title">Current Diameter</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="currentDiameter">Current Diameter</label>
+                        <input type="number" step="0.00001" id="currentDiameter" name="currentDiameter" />
+                    </div>
+                </div>
+
+                <div class="section-title">Roughness</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="osRoughness">Operator Side (OS)</label>
+                        <input type="number" step="0.00001" id="osRoughness" name="osRoughness" />
+                    </div>
+                    <div class="form-group">
+                        <label for="centerRoughness">Center</label>
+                        <input type="number" step="0.00001" id="centerRoughness" name="centerRoughness" />
+                    </div>
+                    <div class="form-group">
+                        <label for="dsRoughness">Drive Side (DSRA)</label>
+                        <input type="number" step="0.00001" id="dsRoughness" name="dsRoughness" />
+                    </div>
+                </div>
+
+                <div class="section-title">Hardness Readings (1 - 10)</div>
+                <div class="form-grid">
+                    {% for i in range(1, 11) %}
+                    <div class="form-group">
+                        <label for="hardness{{ i }}">Hardness {{ i }}</label>
+                        <input type="number" step="0.00001" id="hardness{{ i }}" name="hardness{{ i }}" />
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="inline-button" onclick="calculateAverage()">Calculate Avg</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="averageHardness">Average Hardness</label>
+                        <input type="number" id="averageHardness" name="averageHardness" readonly />
+                    </div>
+                </div>
+
+                <div class="section-title">Eddy Current & UST</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="eddyCurrent">Eddy Current</label>
+                        <input type="number" step="0.00001" id="eddyCurrent" name="eddyCurrent" />
+                    </div>
+                    <div class="form-group">
+                        <label>UST</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="ust" value="OK" /> OK</label>
+                            <label><input type="radio" name="ust" value="NOTOK" /> Not OK</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">Remarks</div>
+                <div class="form-group">
+                    <label for="remark">Additional Remarks</label>
+                    <textarea id="remark" name="remark" placeholder="Enter any additional remarks..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn submit" id="submitBtn" style="margin-top: 20px;" {% if not
+                show_submit_immediately %}hidden{% endif %}>
+                {{ submit_label or 'Mark Selected' }}
+            </button>
+
+
+        </form>
+        {% endif %}
+    </div>
+
+    <script src="../static/js/grinder.js"></script>
+</body>
+
+</html>

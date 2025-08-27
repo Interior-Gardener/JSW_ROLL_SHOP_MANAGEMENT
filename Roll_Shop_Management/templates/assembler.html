@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JSW ASSEMBLER</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/assembler.css" />
+    <style>
+        /* Red gradient button style for Select, Dechoke, Assemble, Clear, View Assembled Rolls */
+        #selectRowBtn,
+        #dechokeBtn,
+        #clearBtn,
+        #rollForm button[type="submit"],
+        #viewAssembledRollsBtn,
+        #searchBtn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'PT Sans', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        #selectRowBtn:hover,
+        #dechokeBtn:hover,
+        #clearBtn:hover,
+        #rollForm button[type="submit"]:hover,
+        #viewAssembledRollsBtn:hover,
+        #searchBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+
+        /* Container for Select Row and Dechoke buttons */
+        #buttonContainer {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Container for Assemble and Clear buttons - fixed at bottom of form */
+        #formButtonContainer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Enlarge radio buttons in table */
+        #tableContainer table td input[type="radio"] {
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+
+        /* Curved corners for input and select */
+        #rollForm input[type="text"],
+        #rollForm select {
+            border-radius: 8px;
+            font-size: 17px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 8px;
+            margin-right: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Increased font size for labels */
+        #rollForm label {
+            font-size: 18px;
+        }
+
+        /* Ensure hidden select boxes look the same when shown */
+        #frontChock,
+        #backChock {
+            font-size: 16px;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 8px;
+            margin-right: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Search bar style */
+        #searchBar {
+            padding: 10px;
+            font-size: 1px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            min-width: 200px;
+            max-width: 300px;
+        }
+
+        #searchContainer {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .red-gradient-btn {
+            margin-left: auto;
+            margin-right: 0;
+            width: 200px;
+            font-size: large;
+            border-radius: 25px;
+            color: #dc1229;
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(45deg, rgba(220, 18, 41, 0.1), rgba(220, 18, 41, 0.2));
+            border: 2px solid rgba(220, 18, 41, 0.3);
+        }
+
+        .red-gradient-btn:hover {
+            background: linear-gradient(45deg, rgba(220, 18, 41, 0.2), rgba(220, 18, 41, 0.3));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 18, 41, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ROLL ASSEMBLY POINT</h1>
+        <a href="homepage.html" id="home">Go to home</a>
+
+        <!-- Choke/Dechoke Dropdown -->
+        <div class="tabs">
+            <div class="dropdown-wrapper dropdown">
+                <button class="btnstatus" id="chokeRollBtn"><span>ROLL ASSEMBLY</span></button>
+                <div class="dropdown-content">
+                    <button class="btnstatus" id="chokeRollBtnInner">CHOKE ROLL</button>
+                    <button class="btnstatus" id="dechokeRollBtn">DE-ASSEMBLE ROLL</button>
+                </div>
+            </div>
+            <a href="brg.html" class="red-gradient-btn">CHOCK/BRG SECTION</a>
+        </div>
+        <div>
+            <!-- Roll Type Buttons for Choke -->
+            <div class="rolls_tab" style="display: none;" id="rollButtons">
+                <button class="roll-data-btn" data-roll-type="WORK ROLL">Work Roll Data</button>
+                <button class="roll-data-btn" data-roll-type="IMR ROLL">IMR Data</button>
+                <button class="roll-data-btn" data-roll-type="BUP ROLL">Backup Roll Data</button>
+                <button class="roll-data-btn" data-roll-type="ALL">All Roll Data</button>
+            </div>
+        </div>
+
+        <!-- Form for Roll Assembly (Choke) -->
+        <div id="selectionForm" style="margin-top: 20px;">
+            <form id="rollForm">
+                <label for="vendorNo">Vendor No:</label>
+                <input type="text" id="vendorNo" name="vendorNo">
+
+                <label for="diaMin">Dia Min:</label>
+                <input type="text" id="diaMin" name="diaMin">
+
+                <label for="diaCurrent">Dia Current:</label>
+                <input type="text" id="diaCurrent" name="diaCurrent">
+
+                <label for="diaMax">Dia Max:</label>
+                <input type="text" id="diaMax" name="diaMax">
+
+                <label for="rollType">Roll Type:</label>
+                <input type="text" id="rollType" name="rollType">
+                <div></div>
+                <label for="position">Position:</label>
+                <select id="position" name="position">
+                    <option value="">--Select Position--</option>
+                    <option value="TOP">TOP</option>
+                    <option value="BOTTOM">BOTTOM</option>
+                </select>
+
+                <label for="frontChock" style="display:none;" id="frontChockLabel">Front Chock:</label>
+                <select id="frontChock" name="frontChock" style="display:none;"></select>
+
+                <label for="backChock" style="display:none;" id="backChockLabel">Back Chock:</label>
+                <select id="backChock" name="backChock" style="display:none;"></select>
+
+                <!-- Fixed button container below the form inputs -->
+                <div id="formButtonContainer">
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit">Assemble</button>
+                        <button type="button" id="clearBtn">Clear</button>
+                    </div>
+                    <div id="searchContainer">
+                        <input type="text" id="searchBar" placeholder="Search by Vendor No...">
+                        <button type="button" id="searchBtn">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Dechoke Section -->
+        <div id="dechokeSection" style="display: none; margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <!-- Left Side: View Button -->
+                <button id="viewAssembledRollsBtn">View Assembled Rolls</button>
+
+                <!-- Right Side: Dechoke Search Bar in its own container -->
+                <div id="dechokeSearchContainer"
+                    style="display: flex; gap: 10px; align-items: center; justify-content: flex-end;">
+                    <input type="text" id="dechokeSearchBar" placeholder="Search by Vendor No..."
+                        style="padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; min-width: 200px; max-width: 300px;" />
+                    <button type="button" id="dechokeSearchBtn"
+                        style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); padding: 10px 18px; border: none; border-radius: 5px; cursor: pointer; font-family: 'PT Sans', sans-serif; font-size: 16px; min-width: 120px; text-align: center;">Search</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- Table Display Area -->
+    <div id="tableContainer" style="max-height: 600px; overflow-y: auto; overflow-x: auto; margin-top: 20px; border: 1px solid #ccc; border-radius: 8px;"></div>
+
+
+    <!-- Select / Dechoke Button Container -->
+    <div id="buttonContainer">
+        <button id="selectRowBtn">Select Row</button>
+        <button id="dechokeBtn" style="display:none;">De-Assemble</button>
+    </div>
+    </div>
+
+    <script src="../static/js/assembler.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSW</title>
+    <link rel="stylesheet" href="../static/homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Wave animation background -->
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <!-- Floating circles animation -->
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <header>
+        <div class="logo-container">
+            <img src="../static/logo.png" alt="logo Image" onclick="location.reload();">
+        </div>
+
+        <div id="authButtons" class="auth-buttons">
+            <div class="welcome user-display">
+                <p style="text-align:center; font-weight:bold;">Welcome, {{ user.employeeid }}</p>
+            </div>
+            <button id="logoutBtn" onclick="window.location.href='{{ url_for('logout') }}'">Logout</button>
+        </div>
+    </header>
+
+    <hr style="border: none; height: 2px; background-color: #004C97; ">
+
+    <div class="content">
+        <div class="container">
+            <div class="slider">
+                {% for slide in slides %}
+                <img src="{{ url_for('static', filename=slide) }}" class="slide {% if loop.first %}active{% endif %}" alt="Slide {{ loop.index }}">
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="tabs">
+            {% if user.role == 'MASTER' %}
+                <!-- MASTER sees all tabs -->
+                <a href="grinding.html">Enter Grinding Details</a>
+                <a href="job_work_details.html">Enter Job Work Details</a>
+                <a href="sap_purchase_details.html">Enter Sap Purchase Details</a>
+                <!-- <a href="inventoryform.html">Enter Inventory Upload</a> -->
+                <a href="level_2_data.html">Level 2 Data</a>
+                <a href="crs.html">Change Roll Status</a>
+                <a href="grinder.html">Charge Roll</a>
+                <a href="assembler.html">Assemble Roll</a>
+                <a href="stand.html">Stand Point</a>
+            {% elif user.role == 'GRINDER' %}
+                <!-- Grinder sees only Charge Roll -->
+                <a href="grinder.html">Charge Roll</a>
+            {% elif user.role == 'ASSEMBLER' %}
+                <!-- Assembler sees only Assemble Roll -->
+                <a href="assembler.html">Assemble Roll</a>
+                <a href="stand.html">Stand Point</a>
+            {% else %}
+                <!-- Other users (Normal users) see grinding to inventory upload -->
+                <a href="grinding.html">Enter Grinding Details</a>
+                <a href="job_work_details.html">Enter Job Work Details</a>
+                <a href="sap_purchase_details.html">Enter Sap Purchase Details</a>
+                <!-- <a href="inventoryform.html">Enter Inventory Upload</a> -->
+                <a href="level_2_data.html">Level 2 Data</a>
+            {% endif %}
+        </div>
+
+        <script src="../static/js/homepage.js"></script>
+    </div>
+</body>
+
+</html>

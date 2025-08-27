@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grinding Details -IMR - JSW</title>
+    <link rel="stylesheet" href="../static/drop.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Intermediate Roll Data</h1>
+        <a href="homepage.html" id="home">Go to home</a>
+        <div class="tabs">
+            <div class="dropdown-wrapper dropdown">
+                <a href="grinding.html">
+                    <span class="active">Grinding Details</span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="wr.html">Work Roll Data</a>
+                    <a href="imr.html">IMR Data</a>
+                    <a href="br.html">Backup Roll Data</a>
+                    <a href="allrd.html">All Roll Data</a>
+                </div>
+            </div>
+            <a href="imr.html"><span class="active">IMR</span></a>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search anything in table...">
+            <button class="search-button" onclick="searchTable()">Search</button>
+        </div>
+        {% if table_data %}
+    <div
+        style="max-height: 600px; overflow-y: auto; overflow-x: auto; margin-top: 20px; border: 1px solid #ccc; border-radius: 8px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    {% for key in table_data[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data %}
+                <tr>
+                    {% for value in row.values() %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert">No data available or error connecting to database.</div>
+    {% endif %}
+    </div>
+
+    
+    <script src="../static/js/br.js"></script>
+</body>
+
+</html>

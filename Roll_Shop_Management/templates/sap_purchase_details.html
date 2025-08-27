@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSW</title>
+    <link rel="stylesheet" href="../static/drop.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Roll Shop Data Entry</h1>
+        <a href="homepage.html" id="home">Go to home</a>
+        <div class="tabs">
+            <a href="grinding.html"><span >Grinding Details</span></a>
+            <a href="job_work_details.html"><span>Job Work Details</span></a>
+            <a href="level_2_data.html"><span>Level-2 Data</span></a>
+            <a href="sap_purchase_details.html"><span class="active">SAP Purchase Details</span></a>
+        </div>
+
+        <div class="upload-section">
+            <a href="{{ url_for('download_file', filename='Basic_template.xlsx') }}" class="btn download">
+                <i class="fas fa-download"></i> Download Excel Template
+            </a>
+            <!-- <button class="btn download" onclick="downloadfile()">Download Excel Template</button> -->
+            <div class="upload-box">
+                <p><strong>Upload File</strong></p>
+                <div class="drop-area">
+                    <p>Drag and drop file here</p>
+                    <input type="file" id="fileInput">
+                    <button class="btn browse">Browse files</button>
+                </div>
+                <div class="uploaded-file">
+                    <p>✔ SAP_Purchase_Details_Sample.xlsx</p>
+                </div>
+            </div>
+        </div>
+        <div class="data-table">
+            <h2>SAP Purchase Records</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Purchase Order</th>
+                        <th>Roll Number</th>
+                        <th>Supplier</th>
+                        <th>Quantity</th>
+                        <th>Order Date</th>
+                        <th>Delivery Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PO-1001</td>
+                        <td>BR-001</td>
+                        <td>Supplier A</td>
+                        <td>10</td>
+                        <td>2025-05-15</td>
+                        <td>2025-06-01</td>
+                    </tr>
+                    <tr>
+                        <td>PO-1002</td>
+                        <td>IMR-002</td>
+                        <td>Supplier B</td>
+                        <td>5</td>
+                        <td>2025-06-01</td>
+                        <td>2025-06-20</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn submit">Submit Data to SAP Purchase Details</button>
+        </div>
+    </div>
+    <script src="../static/js/sap_purchase_details.js"></script>
+</body>
+
+</html>
